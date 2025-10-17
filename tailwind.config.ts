@@ -22,7 +22,7 @@ export default {
 				border: '240 5% 20%',
 				input: '240 5% 20%',
 				ring: '280 100% 70%',
-				background: '240 10% 8%',
+				background: '240 10% 3.9%',
 				foreground: '0 0% 98%',
 				primary: {
 					DEFAULT: '280 100% 70%',
@@ -37,27 +37,27 @@ export default {
 					foreground: '0 0% 98%'
 				},
 				muted: {
-					DEFAULT: '240 5% 15%',
-					foreground: '240 5% 65%'
+					DEFAULT: '240 5% 10%',
+					foreground: '240 5% 70%'
 				},
 				accent: {
 					DEFAULT: '320 100% 65%',
 					foreground: '0 0% 0%'
 				},
 				popover: {
-					DEFAULT: '240 10% 10%',
+					DEFAULT: '240 10% 5%',
 					foreground: '0 0% 98%'
 				},
 				card: {
-					DEFAULT: '240 8% 12%',
+					DEFAULT: '240 8% 8%',
 					foreground: '0 0% 98%'
 				},
 				sidebar: {
-					DEFAULT: '240 10% 8%',
+					DEFAULT: '240 10% 3.9%',
 					foreground: '0 0% 98%',
 					primary: '280 100% 70%',
 					'primary-foreground': '0 0% 0%',
-					accent: '240 5% 15%',
+					accent: '240 5% 10%',
 					'accent-foreground': '0 0% 98%',
 					border: '240 5% 20%',
 					ring: '280 100% 70%'

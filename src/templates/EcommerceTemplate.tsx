@@ -34,7 +34,7 @@ export const EcommerceTemplate = ({
   const totalItems = getTotalItems()
 
   const header = (
-    <div className={`py-4 border-b border-border/50 backdrop-blur-lg bg-background/80 ${headerClassName}`}>
+    <div className={`py-4 border-b border-border/50 backdrop-blur-lg bg-background/95 ${headerClassName}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
           {/* Logo */}
@@ -79,7 +79,7 @@ export const EcommerceTemplate = ({
                 className="relative hover:bg-primary/10 transition-all hover:scale-110"
                 aria-label="Ver carrito"
               >
-                <ShoppingCart className="h-5 w-5" />
+                <ShoppingCart className="h-5 w-5 text-foreground" />
                 {totalItems > 0 && (
                   <span className="absolute -top-2 -right-2 gradient-purple-orange text-black text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center animate-bounce-slow">
                     {totalItems > 99 ? '99+' : totalItems}
@@ -103,7 +103,7 @@ export const EcommerceTemplate = ({
   )
 
   const footer = (
-    <div className={`bg-card border-t border-border/50 py-16 ${footerClassName}`}>
+    <div className={`bg-card/50 border-t border-border/50 py-16 ${footerClassName}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
           {/* Brand */}

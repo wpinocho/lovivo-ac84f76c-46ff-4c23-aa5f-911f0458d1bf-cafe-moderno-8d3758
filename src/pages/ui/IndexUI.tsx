@@ -26,14 +26,14 @@ export const IndexUI = ({ logic }: IndexUIProps) => {
   return (
     <EcommerceTemplate showCart={true}>
       {/* Hero Section con animaciones */}
-      <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
+      <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden bg-background">
         {/* Background gradient animado */}
-        <div className="absolute inset-0 bg-gradient-to-br from-purple-900/20 via-background to-orange-900/20"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-purple-900/30 via-background to-orange-900/30"></div>
         
         {/* Elementos flotantes decorativos */}
-        <div className="absolute top-20 left-10 w-32 h-32 bg-primary/10 rounded-full blur-3xl animate-float"></div>
-        <div className="absolute bottom-20 right-10 w-40 h-40 bg-secondary/10 rounded-full blur-3xl animate-float" style={{ animationDelay: '1s' }}></div>
-        <div className="absolute top-1/2 left-1/3 w-24 h-24 bg-accent/10 rounded-full blur-3xl animate-float" style={{ animationDelay: '2s' }}></div>
+        <div className="absolute top-20 left-10 w-32 h-32 bg-primary/20 rounded-full blur-3xl animate-float"></div>
+        <div className="absolute bottom-20 right-10 w-40 h-40 bg-secondary/20 rounded-full blur-3xl animate-float" style={{ animationDelay: '1s' }}></div>
+        <div className="absolute top-1/2 left-1/3 w-24 h-24 bg-accent/20 rounded-full blur-3xl animate-float" style={{ animationDelay: '2s' }}></div>
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center z-10">
           <div className="animate-slide-up">
@@ -87,8 +87,8 @@ export const IndexUI = ({ logic }: IndexUIProps) => {
 
       {/* Collections Section */}
       {!loadingCollections && collections.length > 0 && (
-        <section className="py-20 relative">
-          <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/20 to-background"></div>
+        <section className="py-20 relative bg-background">
+          <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/10 to-background"></div>
           
           <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12 animate-slide-up">
@@ -123,8 +123,8 @@ export const IndexUI = ({ logic }: IndexUIProps) => {
       )}
 
       {/* Products Section */}
-      <section className="py-20 relative">
-        <div className="absolute inset-0 bg-gradient-to-b from-background via-card/30 to-background"></div>
+      <section className="py-20 relative bg-background">
+        <div className="absolute inset-0 bg-gradient-to-b from-background via-card/20 to-background"></div>
         
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between mb-12 animate-slide-up">
@@ -185,7 +185,7 @@ export const IndexUI = ({ logic }: IndexUIProps) => {
       </section>
 
       {/* Features Section */}
-      <section className="py-20 relative overflow-hidden">
+      <section className="py-20 relative overflow-hidden bg-background">
         <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-background to-accent/5"></div>
         
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
