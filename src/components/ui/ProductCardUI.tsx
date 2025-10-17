@@ -2,21 +2,8 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Link } from "react-router-dom"
 import { HeadlessProductCard } from "@/components/headless/HeadlessProductCard"
+import { ShoppingCart, Sparkles } from "lucide-react"
 import type { Product } from "@/lib/supabase"
-
-/**
- * EDITABLE UI COMPONENT - ProductCardUI
- * 
- * Este componente solo maneja la presentación del ProductCard.
- * Toda la lógica viene del HeadlessProductCard.
- * 
- * PUEDES MODIFICAR LIBREMENTE:
- * - Colores, temas, estilos
- * - Textos e idioma
- * - Layout y estructura visual
- * - Animaciones y efectos
- * - Agregar features visuales (hover effects, etc.)
- */
 
 interface ProductCardUIProps {
   product: Product
@@ -26,57 +13,63 @@ export const ProductCardUI = ({ product }: ProductCardUIProps) => {
   return (
     <HeadlessProductCard product={product}>
       {(logic) => (
-        <Card className="bg-white border border-gray-200">
-          <CardContent className="p-4">
+        <Card className="bg-card border-border/50 overflow-hidden hover-lift card-glow group transition-all duration-300">
+          <CardContent className="p-0">
             <Link to={`/products/${logic.product.slug}`} className="block">
-              <div className="aspect-square bg-gray-100 rounded-md mb-3 overflow-hidden relative">
+              <div className="aspect-square bg-muted rounded-t-xl overflow-hidden relative">
                 {(logic.matchingVariant?.image || (logic.product.images && logic.product.images.length > 0)) ? (
                   <img
                     src={(logic.matchingVariant?.image as any) || logic.product.images![0]}
                     alt={logic.product.title}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                   />
                 ) : (
-                  <div className="w-full h-full flex items-center justify-center text-gray-400">
+                  <div className="w-full h-full flex items-center justify-center text-muted-foreground">
                     No image
                   </div>
                 )}
 
+                {/* Gradient overlay on hover */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+
                 {/* Badges */}
-                <div className="absolute top-2 left-2 flex flex-col gap-1">
+                <div className="absolute top-3 left-3 flex flex-col gap-2">
                   {logic.discountPercentage && (
-                    <span className="bg-red-500 text-white text-xs px-2 py-1 rounded font-medium">
+                    <span className="bg-accent text-black text-xs px-3 py-1 rounded-full font-bold animate-bounce-slow">
                       -{logic.discountPercentage}%
                     </span>
                   )}
                   {logic.product.featured && (
-                    <span className="bg-orange-500 text-white text-xs px-2 py-1 rounded font-medium">
-                      Featured
+                    <span className="gradient-purple-orange text-black text-xs px-3 py-1 rounded-full font-bold flex items-center gap-1">
+                      <Sparkles className="h-3 w-3" />
+                      Popular
                     </span>
                   )}
                   {!logic.inStock && (
-                    <span className="bg-gray-600 text-white text-xs px-2 py-1 rounded font-medium">
-                      Out of stock
+                    <span className="bg-muted text-muted-foreground text-xs px-3 py-1 rounded-full font-bold">
+                      Agotado
                     </span>
                   )}
                 </div>
               </div>
 
-              <h3 className="text-black font-medium text-sm mb-1 line-clamp-2">
-                {logic.product.title}
-              </h3>
-              {logic.product.description && (
-                <p className="text-gray-600 text-xs mb-3 line-clamp-2">
-                  {logic.product.description.replace(/<[^>]*>/g, '')}
-                </p>
-              )}
+              <div className="p-4">
+                <h3 className="text-foreground font-bold text-lg mb-2 line-clamp-2 group-hover:text-primary transition-colors">
+                  {logic.product.title}
+                </h3>
+                {logic.product.description && (
+                  <p className="text-muted-foreground text-sm mb-3 line-clamp-2">
+                    {logic.product.description.replace(/<[^>]*>/g, '')}
+                  </p>
+                )}
+              </div>
             </Link>
 
             {logic.hasVariants && logic.options && (
-              <div className="mb-3 space-y-2">
+              <div className="px-4 pb-3 space-y-2">
                 {logic.options.map((opt) => (
                   <div key={opt.id}>
-                    <div className="text-xs font-medium text-black mb-1">{opt.name}</div>
+                    <div className="text-xs font-bold text-muted-foreground mb-2">{opt.name}</div>
                     <div className="flex flex-wrap gap-2">
                       {opt.values.filter(val => logic.isOptionValueAvailable(opt.name, val)).map((val) => {
                         const isSelected = logic.selected[opt.name] === val
@@ -89,13 +82,12 @@ export const ProductCardUI = ({ product }: ProductCardUIProps) => {
                               type="button"
                               onClick={() => logic.handleOptionChange(opt.name, val)}
                               title={`${opt.name}: ${val}`}
-                              className={`h-6 w-6 rounded-full border ${
-                                logic.selected[opt.name] && !isSelected ? 'opacity-40' : ''
+                              className={`h-7 w-7 rounded-full border-2 transition-all ${
+                                isSelected 
+                                  ? 'border-primary scale-110' 
+                                  : 'border-border hover:border-primary/50'
                               }`}
-                              style={{ 
-                                backgroundColor: swatch, 
-                                borderColor: '#e5e7eb'
-                              }}
+                              style={{ backgroundColor: swatch }}
                               aria-label={`${opt.name}: ${val}`}
                             />
                           )
@@ -106,12 +98,10 @@ export const ProductCardUI = ({ product }: ProductCardUIProps) => {
                             key={val}
                             type="button"
                             onClick={() => logic.handleOptionChange(opt.name, val)}
-                            className={`border rounded px-2 py-1 text-xs font-medium ${
+                            className={`border rounded-lg px-3 py-1.5 text-xs font-bold transition-all ${
                               isSelected 
-                                ? 'border-black bg-black text-white' 
-                                : logic.selected[opt.name] && !isSelected
-                                  ? 'border-gray-300 bg-white text-gray-700 opacity-40'
-                                  : 'border-gray-300 bg-white text-gray-700'
+                                ? 'gradient-purple-orange text-black border-transparent' 
+                                : 'border-border bg-card text-foreground hover:border-primary/50'
                             }`}
                             aria-pressed={isSelected}
                             aria-label={`${opt.name}: ${val}`}
@@ -127,28 +117,28 @@ export const ProductCardUI = ({ product }: ProductCardUIProps) => {
               </div>
             )}
 
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between p-4 pt-0">
               <div className="flex flex-col">
-                <span className="text-black font-semibold">
+                <span className="text-foreground font-black text-xl">
                   {logic.formatMoney(logic.currentPrice)}
                 </span>
                 {logic.currentCompareAt && logic.currentCompareAt > logic.currentPrice && (
-                  <span className="text-gray-400 text-xs line-through">
+                  <span className="text-muted-foreground text-sm line-through">
                     {logic.formatMoney(logic.currentCompareAt)}
                   </span>
                 )}
               </div>
               <Button
-                variant="outline"
                 size="sm"
                 onClick={() => {
-                  logic.onAddToCartSuccess() // Hook para features adicionales
+                  logic.onAddToCartSuccess()
                   logic.handleAddToCart()
                 }}
                 disabled={!logic.canAddToCart}
-                className="text-black border-black hover:bg-black hover:text-white disabled:opacity-50"
+                className="gradient-purple-orange text-black font-bold hover:scale-105 transition-transform disabled:opacity-50 disabled:hover:scale-100"
               >
-                {logic.inStock ? 'Add' : 'Out of stock'}
+                <ShoppingCart className="mr-2 h-4 w-4" />
+                {logic.inStock ? 'Agregar' : 'Agotado'}
               </Button>
             </div>
           </CardContent>
